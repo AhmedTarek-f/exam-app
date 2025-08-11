@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam_app/core/router/route_names.dart';
 import 'package:exam_app/presentation/profile/views/widgets/logout_button.dart';
 import 'package:exam_app/presentation/profile/views/widgets/profile_form.dart';
@@ -9,6 +6,9 @@ import 'package:exam_app/presentation/profile/views/widgets/update_profile_butto
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_state.dart';
 import 'package:exam_app/utils/loaders/loaders.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
@@ -16,6 +16,10 @@ class ProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProfileCubit, ProfileState>(
+      listenWhen: (previous, current) =>
+          current is LogoutFailureState ||
+          current is LogoutSuccessState ||
+          current is NavigateToChangePasswordState,
       listener: (context, state) {
         if (state is LogoutFailureState) {
           Loaders.showErrorMessage(
@@ -26,6 +30,8 @@ class ProfileViewBody extends StatelessWidget {
           Navigator.of(
             context,
           ).pushNamedAndRemoveUntil(RouteNames.login, (route) => false);
+        } else if (state is NavigateToChangePasswordState) {
+          Navigator.of(context).pushNamed(RouteNames.changePassword);
         }
       },
       child: const SingleChildScrollView(

@@ -1,5 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:exam_app/api/client/api_result.dart';
 import 'package:exam_app/core/constants/const_keys.dart';
 import 'package:exam_app/domain/entities/login/user_data_entity.dart';
@@ -9,11 +7,15 @@ import 'package:exam_app/presentation/splash/presentation/views_model/splash_sta
 import 'package:exam_app/utils/exam_method_helper.dart';
 import 'package:exam_app/utils/exceptions/response_exception.dart';
 import 'package:exam_app/utils/secure_storage/secure_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 class SplashCubit extends Cubit<SplashState> {
   final GetUserUseCase _getUserUseCase;
-  SplashCubit(this._getUserUseCase) : super(SplashInitial());
+  final SecureStorage _secureStorage;
+  SplashCubit(this._getUserUseCase, this._secureStorage)
+    : super(SplashInitial());
 
   Future<void> doIntent({required SplashIntent intent}) async {
     switch (intent) {
@@ -46,7 +48,7 @@ class SplashCubit extends Cubit<SplashState> {
   }
 
   Future<void> _navigateAfterCheck() async {
-    final token = await SecureStorage.getData(key: ConstKeys.tokenKey);
+    final token = await _secureStorage.getData(key: ConstKeys.tokenKey);
     ExamMethodHelper.currentUserToken = token;
     final isLoggedIn = token != null && token.isNotEmpty;
     if (isLoggedIn) {
@@ -57,7 +59,7 @@ class SplashCubit extends Cubit<SplashState> {
   }
 
   Future<void> _navigateToLogin() async {
-    await SecureStorage.deleteData(key: ConstKeys.tokenKey);
+    await _secureStorage.deleteData(key: ConstKeys.tokenKey);
     ExamMethodHelper.currentUserToken = null;
     ExamMethodHelper.userData = null;
     emit(NavigationState());

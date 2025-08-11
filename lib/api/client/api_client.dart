@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:exam_app/api/requests/change_password_request/change_password_request.dart';
 import 'package:exam_app/api/requests/edit_profile_request/edit_profile_request.dart';
 import 'package:exam_app/api/requests/email_verification_request/email_verification_request.dart';
 import 'package:exam_app/api/requests/forget_password_request/forget_password_email_request.dart';
 import 'package:exam_app/api/requests/login_request/login_request.dart';
 import 'package:exam_app/api/requests/reset_password_request/reset_password_request.dart';
 import 'package:exam_app/api/requests/signup_request/signup_request.dart';
+import 'package:exam_app/api/responses/change_password_response/change_password_response.dart';
 import 'package:exam_app/api/responses/edit_profile_response/edit_profile_response.dart';
 import 'package:exam_app/api/responses/email_verification_response/email_verification_response.dart';
 import 'package:exam_app/api/responses/forget_password_response/forget_password_email_response.dart';
@@ -14,6 +15,7 @@ import 'package:exam_app/api/responses/reset_password_response/reset_password_re
 import 'package:exam_app/api/responses/signup_response/signup_response.dart';
 import 'package:exam_app/api/responses/splash_response/splash_response.dart';
 import 'package:exam_app/core/constants/endpoints.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_client.g.dart';
@@ -24,35 +26,41 @@ abstract class ApiClient {
   @factoryMethod
   factory ApiClient(Dio dio) = _ApiClient;
 
-  @POST(Endpoints.loginUri)
+  @POST(Endpoints.login)
   Future<LoginResponse> login({@Body() required LoginRequest request});
 
-  @POST(Endpoints.forgotPasswordUri)
+  @POST(Endpoints.forgotPassword)
   Future<ForgetPasswordEmailResponse> sendEmailVerification({
     @Body() required ForgetPasswordEmailRequest request,
   });
 
-  @POST(Endpoints.verifyResetCodeUri)
+  @POST(Endpoints.verifyResetCode)
   Future<EmailVerificationResponse> verifyEmailCode({
     @Body() required EmailVerificationRequest request,
   });
-  @POST(Endpoints.signUpUri)
+  @POST(Endpoints.signUp)
   Future<SignupResponse> signup({@Body() required SignupRequest request});
 
-  @PUT(Endpoints.resetPasswordUri)
+  @PUT(Endpoints.resetPassword)
   Future<ResetPasswordResponse> resetPassword({
     @Body() required ResetPasswordRequest request,
   });
 
-  @GET(Endpoints.logoutUri)
+  @GET(Endpoints.logout)
   Future<void> logout({@Header("token") required String token});
 
-  @PUT(Endpoints.editProfileUri)
+  @PUT(Endpoints.editProfile)
   Future<EditProfileResponse> editProfile({
     @Header("token") required String token,
     @Body() required EditProfileRequest request,
   });
 
-  @GET(Endpoints.getUserDataUri)
+  @GET(Endpoints.getUserData)
   Future<SplashResponse> getUserData({@Header("token") required String token});
+
+  @PATCH(Endpoints.changePassword)
+  Future<ChangePasswordResponse> changePassword({
+    @Header("token") required String token,
+    @Body() required ChangePasswordRequest request,
+  });
 }

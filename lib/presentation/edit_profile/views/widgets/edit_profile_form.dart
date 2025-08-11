@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam_app/core/common_widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/constants/app_text.dart';
 import 'package:exam_app/presentation/edit_profile/views_model/edit_profile_cubit.dart';
+import 'package:exam_app/presentation/edit_profile/views_model/edit_profile_intent.dart';
 import 'package:exam_app/presentation/edit_profile/views_model/edit_profile_state.dart';
 import 'package:exam_app/utils/validations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditProfileForm extends StatelessWidget {
   const EditProfileForm({super.key});
@@ -74,7 +75,9 @@ class EditProfileForm extends StatelessWidget {
             GestureDetector(
               onTap: state is! EditProfileLoadingState
                   ? () {
-                      debugPrint("Navigate To Change Password Screen");
+                      controller.doIntent(
+                        intent: NavigateToChangePasswordIntent(),
+                      );
                     }
                   : () {},
               child: CustomTextFormField(

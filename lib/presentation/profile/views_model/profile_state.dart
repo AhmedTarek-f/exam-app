@@ -6,6 +6,8 @@ final class ProfileInitial extends ProfileState {}
 
 final class UpdatedProfileDataState extends ProfileState {}
 
+final class NavigateToChangePasswordState extends ProfileState {}
+
 final class LogoutSuccessState extends ProfileState {}
 
 final class LogoutLoadingState extends ProfileState {}

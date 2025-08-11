@@ -71,6 +71,9 @@ abstract final class AppText {
   static const String editProfileSuccessMessage =
       "Your profile has been successfully updated";
 
+  // Reset Password
+  static const String currentPassword = "Current password";
+
   //Dialogs
   static const String startQuizMessage =
       "Are you certain you want to begin the quiz?";

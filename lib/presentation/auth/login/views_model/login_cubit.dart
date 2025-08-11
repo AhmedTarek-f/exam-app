@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:exam_app/api/client/api_result.dart';
 import 'package:exam_app/api/requests/login_request/login_request.dart';
 import 'package:exam_app/core/cache/shared_preferences_helper.dart';
@@ -12,12 +9,16 @@ import 'package:exam_app/presentation/auth/login/views_model/login_state.dart';
 import 'package:exam_app/utils/exam_method_helper.dart';
 import 'package:exam_app/utils/exceptions/response_exception.dart';
 import 'package:exam_app/utils/secure_storage/secure_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
-  final LoginWithEmailAndPasswordUseCase loginWithEmailAndPasswordUseCase;
+  final LoginWithEmailAndPasswordUseCase _loginWithEmailAndPasswordUseCase;
+  final SecureStorage _secureStorage;
   @factoryMethod
-  LoginCubit({required this.loginWithEmailAndPasswordUseCase})
+  LoginCubit(this._loginWithEmailAndPasswordUseCase, this._secureStorage)
     : super(LoginInitial());
 
   late final TextEditingController emailController;
@@ -82,32 +83,32 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> _rememberUserData() async {
-    await SecureStorage.saveData(
+    await _secureStorage.saveData(
       key: ConstKeys.email,
       value: emailController.text,
     );
-    await SecureStorage.saveData(
+    await _secureStorage.saveData(
       key: ConstKeys.password,
       value: passwordController.text,
     );
   }
 
   Future<void> _forgetUserData() async {
-    await SecureStorage.deleteData(key: ConstKeys.email);
-    await SecureStorage.deleteData(key: ConstKeys.password);
+    await _secureStorage.deleteData(key: ConstKeys.email);
+    await _secureStorage.deleteData(key: ConstKeys.password);
   }
 
   Future<void> _getRememberedUserData() async {
     emailController.text =
-        await SecureStorage.getData(key: ConstKeys.email) ?? "";
+        await _secureStorage.getData(key: ConstKeys.email) ?? "";
     passwordController.text =
-        await SecureStorage.getData(key: ConstKeys.password) ?? "";
+        await _secureStorage.getData(key: ConstKeys.password) ?? "";
   }
 
   Future<void> _login() async {
     if (loginFormKey.currentState!.validate()) {
       emit(LoginLoadingState());
-      var userData = await loginWithEmailAndPasswordUseCase.invoke(
+      var userData = await _loginWithEmailAndPasswordUseCase.invoke(
         request: LoginRequest(
           email: emailController.text,
           password: passwordController.text,

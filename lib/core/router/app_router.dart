@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:exam_app/core/router/route_names.dart';
 import 'package:exam_app/presentation/auth/forget_password/email_verification/views/email_verification_view.dart';
 import 'package:exam_app/presentation/auth/forget_password/forget_password_email/views/forget_password_email_view.dart';
 import 'package:exam_app/presentation/auth/forget_password/reset_password/views/reset_password_view.dart';
 import 'package:exam_app/presentation/auth/login/views/login_view.dart';
 import 'package:exam_app/presentation/auth/signup/views/sign_up_screen.dart';
+import 'package:exam_app/presentation/change_password/views/change_password_view.dart';
 import 'package:exam_app/presentation/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:exam_app/presentation/edit_profile/views/edit_profile_view.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
 import 'package:exam_app/presentation/splash/presentation/views/splash_screen.dart';
+import 'package:flutter/material.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -41,9 +42,10 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => EditProfileView(profileController: profileController),
         );
-
+      case RouteNames.changePassword:
+        return MaterialPageRoute(builder: (_) => const ChangePasswordView());
       default:
-        return MaterialPageRoute(builder: (_) => const LoginView());
+        return null;
     }
   }
 }
