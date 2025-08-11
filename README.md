@@ -58,8 +58,8 @@ lib/
 
 ## 🛠️ Setup Instructions
 
-- **1. Clone the repository**: git clone https://github.com/AhmedTarek-f/online-exam-app
-- **2. Navigate into the project directory**: cd online-exam-app
+- **1. Clone the repository**: git clone https://github.com/AhmedTarek-f/exam-app
+- **2. Navigate into the project directory**: cd exam-app
 - **3. Install dependencies**: flutter pub get
 - **4. Run the app**: flutter run
 
