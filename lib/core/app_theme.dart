@@ -1,6 +1,6 @@
+import 'package:exam_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:exam_app/core/constants/app_colors.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -65,6 +65,24 @@ abstract class AppTheme {
       cursorColor: AppColors.primary,
       selectionHandleColor: AppColors.primary,
       selectionColor: AppColors.primary.withValues(alpha: 0.2),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.lightBlue,
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.primary,
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      showUnselectedLabels: true,
+      selectedLabelStyle: TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.primary,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.primary,
+      ),
     ),
   );
 }

@@ -10,6 +10,7 @@ import 'package:exam_app/api/responses/change_password_response/change_password_
 import 'package:exam_app/api/responses/edit_profile_response/edit_profile_response.dart';
 import 'package:exam_app/api/responses/email_verification_response/email_verification_response.dart';
 import 'package:exam_app/api/responses/forget_password_response/forget_password_email_response.dart';
+import 'package:exam_app/api/responses/home/subject_response.dart';
 import 'package:exam_app/api/responses/login_response/login_response.dart';
 import 'package:exam_app/api/responses/reset_password_response/reset_password_response.dart';
 import 'package:exam_app/api/responses/signup_response/signup_response.dart';
@@ -62,5 +63,10 @@ abstract class ApiClient {
   Future<ChangePasswordResponse> changePassword({
     @Header("token") required String token,
     @Body() required ChangePasswordRequest request,
+  });
+
+  @GET(Endpoints.getAllSubjects)
+  Future<SubjectResponse> getAllSubjects({
+    @Header("token") required String token,
   });
 }

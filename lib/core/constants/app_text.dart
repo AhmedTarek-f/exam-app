@@ -23,7 +23,7 @@ abstract final class AppText {
   static const String signup = "Sign up";
   static const String signupDots = "Signing Up...";
 
-  //DashBoard
+  // Home
   static const String language = "Language";
   static const String math = "Math";
   static const String art = "Art";
@@ -31,6 +31,9 @@ abstract final class AppText {
   static const String search = "Search";
   static const String survey = "Survey";
   static const String browseBySubject = "Browse by subject";
+  static const String explore = "Explore";
+  static const String result = "Result";
+  static const String profile = "Profile";
 
   //Splash
   static const tryAgain = "Try again";

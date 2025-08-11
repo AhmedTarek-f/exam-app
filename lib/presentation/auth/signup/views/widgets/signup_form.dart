@@ -26,7 +26,9 @@ class SignupForm extends StatelessWidget {
             context: context,
           );
         } else if (state is SignUpSuccessState) {
-          Navigator.of(context).pushReplacementNamed(RouteNames.dashboard);
+          Navigator.of(
+            context,
+          ).pushReplacementNamed(RouteNames.homeBottomNavigation);
         }
       },
       buildWhen: (previous, current) =>

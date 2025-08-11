@@ -3,25 +3,25 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i12;
+import 'dart:async' as _i13;
 
-import 'package:connectivity_plus/connectivity_plus.dart' as _i20;
+import 'package:connectivity_plus/connectivity_plus.dart' as _i21;
 import 'package:connectivity_plus_platform_interface/connectivity_plus_platform_interface.dart'
-    as _i21;
-import 'package:exam_app/api/client/api_client.dart' as _i11;
+    as _i22;
+import 'package:exam_app/api/client/api_client.dart' as _i12;
 import 'package:exam_app/api/requests/change_password_request/change_password_request.dart'
-    as _i19;
+    as _i20;
 import 'package:exam_app/api/requests/edit_profile_request/edit_profile_request.dart'
-    as _i18;
+    as _i19;
 import 'package:exam_app/api/requests/email_verification_request/email_verification_request.dart'
-    as _i15;
-import 'package:exam_app/api/requests/forget_password_request/forget_password_email_request.dart'
-    as _i14;
-import 'package:exam_app/api/requests/login_request/login_request.dart' as _i13;
-import 'package:exam_app/api/requests/reset_password_request/reset_password_request.dart'
-    as _i17;
-import 'package:exam_app/api/requests/signup_request/signup_request.dart'
     as _i16;
+import 'package:exam_app/api/requests/forget_password_request/forget_password_email_request.dart'
+    as _i15;
+import 'package:exam_app/api/requests/login_request/login_request.dart' as _i14;
+import 'package:exam_app/api/requests/reset_password_request/reset_password_request.dart'
+    as _i18;
+import 'package:exam_app/api/requests/signup_request/signup_request.dart'
+    as _i17;
 import 'package:exam_app/api/responses/change_password_response/change_password_response.dart'
     as _i9;
 import 'package:exam_app/api/responses/edit_profile_response/edit_profile_response.dart'
@@ -30,6 +30,7 @@ import 'package:exam_app/api/responses/email_verification_response/email_verific
     as _i4;
 import 'package:exam_app/api/responses/forget_password_response/forget_password_email_response.dart'
     as _i3;
+import 'package:exam_app/api/responses/home/subject_response.dart' as _i10;
 import 'package:exam_app/api/responses/login_response/login_response.dart'
     as _i2;
 import 'package:exam_app/api/responses/reset_password_response/reset_password_response.dart'
@@ -38,8 +39,8 @@ import 'package:exam_app/api/responses/signup_response/signup_response.dart'
     as _i5;
 import 'package:exam_app/api/responses/splash_response/splash_response.dart'
     as _i8;
-import 'package:exam_app/utils/secure_storage/secure_storage.dart' as _i22;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i10;
+import 'package:exam_app/utils/secure_storage/secure_storage.dart' as _i23;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -103,40 +104,46 @@ class _FakeChangePasswordResponse_7 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeFlutterSecureStorage_8 extends _i1.SmartFake
-    implements _i10.FlutterSecureStorage {
-  _FakeFlutterSecureStorage_8(Object parent, Invocation parentInvocation)
+class _FakeSubjectResponse_8 extends _i1.SmartFake
+    implements _i10.SubjectResponse {
+  _FakeSubjectResponse_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeFlutterSecureStorage_9 extends _i1.SmartFake
+    implements _i11.FlutterSecureStorage {
+  _FakeFlutterSecureStorage_9(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiClient extends _i1.Mock implements _i11.ApiClient {
+class MockApiClient extends _i1.Mock implements _i12.ApiClient {
   MockApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<_i2.LoginResponse> login({required _i13.LoginRequest? request}) =>
+  _i13.Future<_i2.LoginResponse> login({required _i14.LoginRequest? request}) =>
       (super.noSuchMethod(
             Invocation.method(#login, [], {#request: request}),
-            returnValue: _i12.Future<_i2.LoginResponse>.value(
+            returnValue: _i13.Future<_i2.LoginResponse>.value(
               _FakeLoginResponse_0(
                 this,
                 Invocation.method(#login, [], {#request: request}),
               ),
             ),
           )
-          as _i12.Future<_i2.LoginResponse>);
+          as _i13.Future<_i2.LoginResponse>);
 
   @override
-  _i12.Future<_i3.ForgetPasswordEmailResponse> sendEmailVerification({
-    required _i14.ForgetPasswordEmailRequest? request,
+  _i13.Future<_i3.ForgetPasswordEmailResponse> sendEmailVerification({
+    required _i15.ForgetPasswordEmailRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#sendEmailVerification, [], {#request: request}),
-            returnValue: _i12.Future<_i3.ForgetPasswordEmailResponse>.value(
+            returnValue: _i13.Future<_i3.ForgetPasswordEmailResponse>.value(
               _FakeForgetPasswordEmailResponse_1(
                 this,
                 Invocation.method(#sendEmailVerification, [], {
@@ -145,73 +152,73 @@ class MockApiClient extends _i1.Mock implements _i11.ApiClient {
               ),
             ),
           )
-          as _i12.Future<_i3.ForgetPasswordEmailResponse>);
+          as _i13.Future<_i3.ForgetPasswordEmailResponse>);
 
   @override
-  _i12.Future<_i4.EmailVerificationResponse> verifyEmailCode({
-    required _i15.EmailVerificationRequest? request,
+  _i13.Future<_i4.EmailVerificationResponse> verifyEmailCode({
+    required _i16.EmailVerificationRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#verifyEmailCode, [], {#request: request}),
-            returnValue: _i12.Future<_i4.EmailVerificationResponse>.value(
+            returnValue: _i13.Future<_i4.EmailVerificationResponse>.value(
               _FakeEmailVerificationResponse_2(
                 this,
                 Invocation.method(#verifyEmailCode, [], {#request: request}),
               ),
             ),
           )
-          as _i12.Future<_i4.EmailVerificationResponse>);
+          as _i13.Future<_i4.EmailVerificationResponse>);
 
   @override
-  _i12.Future<_i5.SignupResponse> signup({
-    required _i16.SignupRequest? request,
+  _i13.Future<_i5.SignupResponse> signup({
+    required _i17.SignupRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#signup, [], {#request: request}),
-            returnValue: _i12.Future<_i5.SignupResponse>.value(
+            returnValue: _i13.Future<_i5.SignupResponse>.value(
               _FakeSignupResponse_3(
                 this,
                 Invocation.method(#signup, [], {#request: request}),
               ),
             ),
           )
-          as _i12.Future<_i5.SignupResponse>);
+          as _i13.Future<_i5.SignupResponse>);
 
   @override
-  _i12.Future<_i6.ResetPasswordResponse> resetPassword({
-    required _i17.ResetPasswordRequest? request,
+  _i13.Future<_i6.ResetPasswordResponse> resetPassword({
+    required _i18.ResetPasswordRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#resetPassword, [], {#request: request}),
-            returnValue: _i12.Future<_i6.ResetPasswordResponse>.value(
+            returnValue: _i13.Future<_i6.ResetPasswordResponse>.value(
               _FakeResetPasswordResponse_4(
                 this,
                 Invocation.method(#resetPassword, [], {#request: request}),
               ),
             ),
           )
-          as _i12.Future<_i6.ResetPasswordResponse>);
+          as _i13.Future<_i6.ResetPasswordResponse>);
 
   @override
-  _i12.Future<void> logout({required String? token}) =>
+  _i13.Future<void> logout({required String? token}) =>
       (super.noSuchMethod(
             Invocation.method(#logout, [], {#token: token}),
-            returnValue: _i12.Future<void>.value(),
-            returnValueForMissingStub: _i12.Future<void>.value(),
+            returnValue: _i13.Future<void>.value(),
+            returnValueForMissingStub: _i13.Future<void>.value(),
           )
-          as _i12.Future<void>);
+          as _i13.Future<void>);
 
   @override
-  _i12.Future<_i7.EditProfileResponse> editProfile({
+  _i13.Future<_i7.EditProfileResponse> editProfile({
     required String? token,
-    required _i18.EditProfileRequest? request,
+    required _i19.EditProfileRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#editProfile, [], {
               #token: token,
               #request: request,
             }),
-            returnValue: _i12.Future<_i7.EditProfileResponse>.value(
+            returnValue: _i13.Future<_i7.EditProfileResponse>.value(
               _FakeEditProfileResponse_5(
                 this,
                 Invocation.method(#editProfile, [], {
@@ -221,32 +228,32 @@ class MockApiClient extends _i1.Mock implements _i11.ApiClient {
               ),
             ),
           )
-          as _i12.Future<_i7.EditProfileResponse>);
+          as _i13.Future<_i7.EditProfileResponse>);
 
   @override
-  _i12.Future<_i8.SplashResponse> getUserData({required String? token}) =>
+  _i13.Future<_i8.SplashResponse> getUserData({required String? token}) =>
       (super.noSuchMethod(
             Invocation.method(#getUserData, [], {#token: token}),
-            returnValue: _i12.Future<_i8.SplashResponse>.value(
+            returnValue: _i13.Future<_i8.SplashResponse>.value(
               _FakeSplashResponse_6(
                 this,
                 Invocation.method(#getUserData, [], {#token: token}),
               ),
             ),
           )
-          as _i12.Future<_i8.SplashResponse>);
+          as _i13.Future<_i8.SplashResponse>);
 
   @override
-  _i12.Future<_i9.ChangePasswordResponse> changePassword({
+  _i13.Future<_i9.ChangePasswordResponse> changePassword({
     required String? token,
-    required _i19.ChangePasswordRequest? request,
+    required _i20.ChangePasswordRequest? request,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#changePassword, [], {
               #token: token,
               #request: request,
             }),
-            returnValue: _i12.Future<_i9.ChangePasswordResponse>.value(
+            returnValue: _i13.Future<_i9.ChangePasswordResponse>.value(
               _FakeChangePasswordResponse_7(
                 this,
                 Invocation.method(#changePassword, [], {
@@ -256,87 +263,100 @@ class MockApiClient extends _i1.Mock implements _i11.ApiClient {
               ),
             ),
           )
-          as _i12.Future<_i9.ChangePasswordResponse>);
+          as _i13.Future<_i9.ChangePasswordResponse>);
+
+  @override
+  _i13.Future<_i10.SubjectResponse> getAllSubjects({required String? token}) =>
+      (super.noSuchMethod(
+            Invocation.method(#getAllSubjects, [], {#token: token}),
+            returnValue: _i13.Future<_i10.SubjectResponse>.value(
+              _FakeSubjectResponse_8(
+                this,
+                Invocation.method(#getAllSubjects, [], {#token: token}),
+              ),
+            ),
+          )
+          as _i13.Future<_i10.SubjectResponse>);
 }
 
 /// A class which mocks [Connectivity].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConnectivity extends _i1.Mock implements _i20.Connectivity {
+class MockConnectivity extends _i1.Mock implements _i21.Connectivity {
   MockConnectivity() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Stream<List<_i21.ConnectivityResult>> get onConnectivityChanged =>
+  _i13.Stream<List<_i22.ConnectivityResult>> get onConnectivityChanged =>
       (super.noSuchMethod(
             Invocation.getter(#onConnectivityChanged),
-            returnValue: _i12.Stream<List<_i21.ConnectivityResult>>.empty(),
+            returnValue: _i13.Stream<List<_i22.ConnectivityResult>>.empty(),
           )
-          as _i12.Stream<List<_i21.ConnectivityResult>>);
+          as _i13.Stream<List<_i22.ConnectivityResult>>);
 
   @override
-  _i12.Future<List<_i21.ConnectivityResult>> checkConnectivity() =>
+  _i13.Future<List<_i22.ConnectivityResult>> checkConnectivity() =>
       (super.noSuchMethod(
             Invocation.method(#checkConnectivity, []),
-            returnValue: _i12.Future<List<_i21.ConnectivityResult>>.value(
-              <_i21.ConnectivityResult>[],
+            returnValue: _i13.Future<List<_i22.ConnectivityResult>>.value(
+              <_i22.ConnectivityResult>[],
             ),
           )
-          as _i12.Future<List<_i21.ConnectivityResult>>);
+          as _i13.Future<List<_i22.ConnectivityResult>>);
 }
 
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i22.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.FlutterSecureStorage get storage =>
+  _i11.FlutterSecureStorage get storage =>
       (super.noSuchMethod(
             Invocation.getter(#storage),
-            returnValue: _FakeFlutterSecureStorage_8(
+            returnValue: _FakeFlutterSecureStorage_9(
               this,
               Invocation.getter(#storage),
             ),
           )
-          as _i10.FlutterSecureStorage);
+          as _i11.FlutterSecureStorage);
 
   @override
-  _i12.Future<void> saveData({required String? key, required String? value}) =>
+  _i13.Future<void> saveData({required String? key, required String? value}) =>
       (super.noSuchMethod(
             Invocation.method(#saveData, [], {#key: key, #value: value}),
-            returnValue: _i12.Future<void>.value(),
-            returnValueForMissingStub: _i12.Future<void>.value(),
+            returnValue: _i13.Future<void>.value(),
+            returnValueForMissingStub: _i13.Future<void>.value(),
           )
-          as _i12.Future<void>);
+          as _i13.Future<void>);
 
   @override
-  _i12.Future<void> saveUserToken({required String? token}) =>
+  _i13.Future<void> saveUserToken({required String? token}) =>
       (super.noSuchMethod(
             Invocation.method(#saveUserToken, [], {#token: token}),
-            returnValue: _i12.Future<void>.value(),
-            returnValueForMissingStub: _i12.Future<void>.value(),
+            returnValue: _i13.Future<void>.value(),
+            returnValueForMissingStub: _i13.Future<void>.value(),
           )
-          as _i12.Future<void>);
+          as _i13.Future<void>);
 
   @override
-  _i12.Future<String?> getData({required String? key}) =>
+  _i13.Future<String?> getData({required String? key}) =>
       (super.noSuchMethod(
             Invocation.method(#getData, [], {#key: key}),
-            returnValue: _i12.Future<String?>.value(),
+            returnValue: _i13.Future<String?>.value(),
           )
-          as _i12.Future<String?>);
+          as _i13.Future<String?>);
 
   @override
-  _i12.Future<void> deleteData({required String? key}) =>
+  _i13.Future<void> deleteData({required String? key}) =>
       (super.noSuchMethod(
             Invocation.method(#deleteData, [], {#key: key}),
-            returnValue: _i12.Future<void>.value(),
-            returnValueForMissingStub: _i12.Future<void>.value(),
+            returnValue: _i13.Future<void>.value(),
+            returnValueForMissingStub: _i13.Future<void>.value(),
           )
-          as _i12.Future<void>);
+          as _i13.Future<void>);
 }
