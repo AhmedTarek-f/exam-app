@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam_app/core/constants/app_text.dart';
+import 'package:exam_app/core/router/route_names.dart';
 import 'package:exam_app/presentation/edit_profile/views/widgets/edit_profile_button.dart';
 import 'package:exam_app/presentation/edit_profile/views/widgets/edit_profile_form.dart';
 import 'package:exam_app/presentation/edit_profile/views/widgets/edit_profile_image.dart';
@@ -10,6 +8,9 @@ import 'package:exam_app/presentation/edit_profile/views_model/edit_profile_stat
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_intent.dart';
 import 'package:exam_app/utils/loaders/loaders.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditProfileViewBody extends StatelessWidget {
   const EditProfileViewBody({super.key, required this.profileController});
@@ -17,6 +18,10 @@ class EditProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<EditProfileCubit, EditProfileState>(
+      listenWhen: (previous, current) =>
+          current is EditProfileFailureState ||
+          current is EditProfileSuccessState ||
+          current is NavigateToChangePasswordState,
       listener: (context, state) {
         if (state is EditProfileFailureState) {
           Loaders.showErrorMessage(
@@ -30,6 +35,8 @@ class EditProfileViewBody extends StatelessWidget {
             message: AppText.editProfileSuccessMessage,
             context: context,
           );
+        } else if (state is NavigateToChangePasswordState) {
+          Navigator.of(context).pushNamed(RouteNames.changePassword);
         }
       },
       child: const SingleChildScrollView(

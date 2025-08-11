@@ -15,6 +15,8 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../api/client/api_client.dart' as _i508;
 import '../../api/client/api_module.dart' as _i272;
+import '../../api/data_source/change_password/remote_data_source/change_password_remote_data_source_impl.dart'
+    as _i842;
 import '../../api/data_source/edit_profile/remote_data_source/edit_profile_remote_data_source_impl.dart'
     as _i527;
 import '../../api/data_source/forget_password/email_verification/remote_data_source/email_verification_remote_data_source_impl.dart'
@@ -31,6 +33,8 @@ import '../../api/data_source/signup/remote_data_source/signup_remote_data_sourc
     as _i354;
 import '../../api/data_source/splash/remote_data_source/splash_remote_data_source_impl.dart'
     as _i1009;
+import '../../data/data_source/change_password/remote_data_source/change_password_remote_data_source.dart'
+    as _i56;
 import '../../data/data_source/edit_profile/remote_data_source/edit_profile_remote_data_source.dart'
     as _i500;
 import '../../data/data_source/forget_password/email_verification/remote_data_source/email_verification_remote_data_source.dart'
@@ -47,6 +51,8 @@ import '../../data/data_source/signup/remote_data_source/signup_remote_data_sour
     as _i879;
 import '../../data/data_source/splash/remote_data_source/splash_remote_data_source.dart'
     as _i592;
+import '../../data/repositories/change_password/change_password_repository_impl.dart'
+    as _i1063;
 import '../../data/repositories/edit_profile/edit_profile_repository_impl.dart'
     as _i216;
 import '../../data/repositories/forget_password/email_verification_repository_impl.dart'
@@ -59,6 +65,8 @@ import '../../data/repositories/login/login_repository_impl.dart' as _i722;
 import '../../data/repositories/profile/profile_repository_impl.dart' as _i770;
 import '../../data/repositories/signup/signup_repository_impl.dart' as _i881;
 import '../../data/repositories/splash/splash_repository_impl.dart' as _i928;
+import '../../domain/repositories/change_password/change_password_repository.dart'
+    as _i556;
 import '../../domain/repositories/edit_profile/edit_profile_repository.dart'
     as _i157;
 import '../../domain/repositories/forget_password/email_verification_repository.dart'
@@ -71,6 +79,8 @@ import '../../domain/repositories/login/login_repository.dart' as _i300;
 import '../../domain/repositories/profile/profile_repository.dart' as _i445;
 import '../../domain/repositories/signup/signup_repository.dart' as _i415;
 import '../../domain/repositories/splash/splash_repository.dart' as _i967;
+import '../../domain/use_cases/change_password/change_password_use_case.dart'
+    as _i624;
 import '../../domain/use_cases/edit_profile/edit_profile_use_case.dart' as _i89;
 import '../../domain/use_cases/forget_password/reset_password_use_case.dart'
     as _i690;
@@ -91,6 +101,8 @@ import '../../presentation/auth/forget_password/reset_password/views_model/reset
     as _i941;
 import '../../presentation/auth/login/views_model/login_cubit.dart' as _i512;
 import '../../presentation/auth/signup/views_model/signup_cubit.dart' as _i751;
+import '../../presentation/change_password/views_model/change_password_cubit.dart'
+    as _i276;
 import '../../presentation/dashboard/domain/controllers/home_controller.dart'
     as _i305;
 import '../../presentation/dashboard/presentation/cubits/home_cubit.dart'
@@ -100,6 +112,7 @@ import '../../presentation/edit_profile/views_model/edit_profile_cubit.dart'
 import '../../presentation/profile/views_model/profile_cubit.dart' as _i1028;
 import '../../presentation/splash/presentation/views_model/splash_cubit.dart'
     as _i481;
+import '../../utils/secure_storage/secure_storage.dart' as _i886;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -110,11 +123,18 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final apiModule = _$ApiModule();
     gh.singleton<_i361.Dio>(() => apiModule.provideDio());
+    gh.singleton<_i886.SecureStorage>(() => _i886.SecureStorage());
     gh.lazySingleton<_i69.HomeCubit>(() => _i69.HomeCubit());
     gh.factory<_i305.HomeController>(
       () => _i305.HomeController(gh<_i69.HomeCubit>()),
     );
     gh.factory<_i508.ApiClient>(() => _i508.ApiClient(gh<_i361.Dio>()));
+    gh.factory<_i56.ChangePasswordRemoteDataSource>(
+      () => _i842.ChangePasswordRemoteDataSourceImpl(
+        gh<_i508.ApiClient>(),
+        gh<_i886.SecureStorage>(),
+      ),
+    );
     gh.factory<_i500.EditProfileRemoteDataSource>(
       () => _i527.EditProfileRemoteDataSourceImpl(gh<_i508.ApiClient>()),
     );
@@ -124,15 +144,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i592.SplashRemoteDataSource>(
       () => _i1009.SplashRemoteDataSourceImpl(apiClient: gh<_i508.ApiClient>()),
     );
-    gh.factory<_i684.LoginRemoteDataSource>(
-      () => _i221.LoginRemoteDataSourceImpl(gh<_i508.ApiClient>()),
-    );
-    gh.factory<_i879.SignupRemoteDataSource>(
-      () => _i354.SignupRemoteDataSourceImpl(gh<_i508.ApiClient>()),
+    gh.factory<_i470.ProfileRemoteDataSource>(
+      () => _i913.ProfileRemoteDataSourceImpl(
+        gh<_i508.ApiClient>(),
+        gh<_i886.SecureStorage>(),
+      ),
     );
     gh.factory<_i157.EditProfileRepository>(
       () => _i216.EditProfileRepositoryImpl(
         editProfileRemoteDataSource: gh<_i500.EditProfileRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i879.SignupRemoteDataSource>(
+      () => _i354.SignupRemoteDataSourceImpl(
+        gh<_i508.ApiClient>(),
+        gh<_i886.SecureStorage>(),
       ),
     );
     gh.factory<_i40.ForgetPasswordEmailRemoteDataSource>(
@@ -142,8 +168,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i449.EmailVerificationRemoteDataSource>(
       () => _i40.EmailVerificationRemoteDataSourceImpl(gh<_i508.ApiClient>()),
     );
-    gh.factory<_i470.ProfileRemoteDataSource>(
-      () => _i913.ProfileRemoteDataSourceImpl(gh<_i508.ApiClient>()),
+    gh.factory<_i684.LoginRemoteDataSource>(
+      () => _i221.LoginRemoteDataSourceImpl(
+        gh<_i508.ApiClient>(),
+        gh<_i886.SecureStorage>(),
+      ),
+    );
+    gh.factory<_i556.ChangePasswordRepository>(
+      () => _i1063.ChangePasswordRepositoryImpl(
+        gh<_i56.ChangePasswordRemoteDataSource>(),
+      ),
     );
     gh.factory<_i884.ResetPasswordRepository>(
       () => _i672.ResetPasswordRepositoryImpl(
@@ -189,9 +223,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i139.SignupUseCase>(
       () => _i139.SignupUseCase(gh<_i415.SignupRepository>()),
     );
-    gh.factory<_i481.SplashCubit>(
-      () => _i481.SplashCubit(gh<_i391.GetUserUseCase>()),
-    );
     gh.factory<_i499.ForgetPasswordEmailRepository>(
       () => _i543.ForgetPasswordEmailRepositoryImpl(
         forgetPasswordEmailRemoteDataSource:
@@ -201,26 +232,36 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i217.LogoutUseCase>(
       () => _i217.LogoutUseCase(gh<_i445.ProfileRepository>()),
     );
+    gh.factory<_i481.SplashCubit>(
+      () => _i481.SplashCubit(
+        gh<_i391.GetUserUseCase>(),
+        gh<_i886.SecureStorage>(),
+      ),
+    );
     gh.factory<_i941.ResetPasswordCubit>(
       () => _i941.ResetPasswordCubit(
         resetPasswordUseCase: gh<_i690.ResetPasswordUseCase>(),
       ),
     );
-    gh.factory<_i556.EditProfileCubit>(
-      () => _i556.EditProfileCubit(
-        editProfileUseCase: gh<_i89.EditProfileUseCase>(),
-      ),
-    );
     gh.factory<_i751.SignUpCubit>(
       () => _i751.SignUpCubit(gh<_i139.SignupUseCase>()),
     );
+    gh.factory<_i556.EditProfileCubit>(
+      () => _i556.EditProfileCubit(gh<_i89.EditProfileUseCase>()),
+    );
     gh.factory<_i197.LoginWithEmailAndPasswordUseCase>(
       () => _i197.LoginWithEmailAndPasswordUseCase(gh<_i300.LoginRepository>()),
+    );
+    gh.factory<_i624.ChangePasswordUseCase>(
+      () => _i624.ChangePasswordUseCase(gh<_i556.ChangePasswordRepository>()),
     );
     gh.factory<_i808.SendEmailVerificationUseCase>(
       () => _i808.SendEmailVerificationUseCase(
         gh<_i499.ForgetPasswordEmailRepository>(),
       ),
+    );
+    gh.factory<_i1028.ProfileCubit>(
+      () => _i1028.ProfileCubit(gh<_i217.LogoutUseCase>()),
     );
     gh.factory<_i206.ForgetPasswordEmailCubit>(
       () => _i206.ForgetPasswordEmailCubit(
@@ -230,14 +271,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i513.VerifyEmailUseCase>(
       () => _i513.VerifyEmailUseCase(gh<_i167.EmailVerificationRepository>()),
     );
-    gh.factory<_i1028.ProfileCubit>(
-      () => _i1028.ProfileCubit(logoutUseCase: gh<_i217.LogoutUseCase>()),
-    );
     gh.factory<_i512.LoginCubit>(
       () => _i512.LoginCubit(
-        loginWithEmailAndPasswordUseCase:
-            gh<_i197.LoginWithEmailAndPasswordUseCase>(),
+        gh<_i197.LoginWithEmailAndPasswordUseCase>(),
+        gh<_i886.SecureStorage>(),
       ),
+    );
+    gh.factory<_i276.ChangePasswordCubit>(
+      () => _i276.ChangePasswordCubit(gh<_i624.ChangePasswordUseCase>()),
     );
     gh.factory<_i533.EmailVerificationCubit>(
       () => _i533.EmailVerificationCubit(

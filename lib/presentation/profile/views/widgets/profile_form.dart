@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam_app/core/common_widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/constants/app_text.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
+import 'package:exam_app/presentation/profile/views_model/profile_intent.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileForm extends StatelessWidget {
   const ProfileForm({super.key});
@@ -53,7 +54,7 @@ class ProfileForm extends StatelessWidget {
             const RSizedBox(height: 24),
             GestureDetector(
               onTap: () {
-                debugPrint("Change Password");
+                controller.doIntent(intent: NavigateToChangePasswordIntent());
               },
               child: CustomTextFormField(
                 controller: controller.passwordController,

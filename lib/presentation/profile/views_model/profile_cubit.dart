@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:exam_app/core/constants/app_text.dart';
 import 'package:exam_app/domain/use_cases/profile/logout_use_case.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_intent.dart';
@@ -8,13 +5,15 @@ import 'package:exam_app/presentation/profile/views_model/profile_state.dart';
 import 'package:exam_app/utils/exam_method_helper.dart';
 import 'package:exam_app/utils/exceptions/dio_exceptions.dart';
 import 'package:exam_app/utils/exceptions/response_exception.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
-  @factoryMethod
-  ProfileCubit({required this.logoutUseCase}) : super(ProfileInitial());
+  ProfileCubit(this._logoutUseCase) : super(ProfileInitial());
 
-  final LogoutUseCase logoutUseCase;
+  final LogoutUseCase _logoutUseCase;
   late final TextEditingController userNameController;
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
@@ -32,6 +31,9 @@ class ProfileCubit extends Cubit<ProfileState> {
         break;
       case UpdateProfileDataIntent():
         _updateUserData();
+        break;
+      case NavigateToChangePasswordIntent():
+        _navigateToChangePassword();
         break;
     }
   }
@@ -58,7 +60,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> _logout() async {
     try {
       emit(LogoutLoadingState());
-      await logoutUseCase.invoke();
+      await _logoutUseCase.invoke();
       emit(LogoutSuccessState());
     } catch (error) {
       if (error is DioExceptions) {
@@ -80,6 +82,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     emailController.text = ExamMethodHelper.userData?.email ?? "";
     phoneController.text = ExamMethodHelper.userData?.phone ?? "";
     emit(UpdatedProfileDataState());
+  }
+
+  void _navigateToChangePassword() {
+    emit(NavigateToChangePasswordState());
   }
 
   @override

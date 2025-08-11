@@ -6,6 +6,8 @@ final class EditProfileInitial extends EditProfileState {}
 
 final class EnableAutoValidateModeState extends EditProfileState {}
 
+final class NavigateToChangePasswordState extends EditProfileState {}
+
 final class EditProfileSuccessState extends EditProfileState {}
 
 final class EditProfileLoadingState extends EditProfileState {}

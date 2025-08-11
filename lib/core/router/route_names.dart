@@ -7,4 +7,5 @@ abstract class RouteNames {
   static const String signup = '/signupView';
   static const String dashboard = '/dashboardView';
   static const String editProfile = '/editProfileView';
+  static const String changePassword = '/changePasswordView';
 }
