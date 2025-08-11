@@ -5,11 +5,13 @@ import 'package:exam_app/presentation/auth/forget_password/reset_password/views/
 import 'package:exam_app/presentation/auth/login/views/login_view.dart';
 import 'package:exam_app/presentation/auth/signup/views/sign_up_screen.dart';
 import 'package:exam_app/presentation/change_password/views/change_password_view.dart';
-import 'package:exam_app/presentation/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:exam_app/presentation/edit_profile/views/edit_profile_view.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/presentation/views/home_bottom_navigation_view.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/presentation/views_model/home_bottom_navigation_cubit.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
 import 'package:exam_app/presentation/splash/presentation/views/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -34,8 +36,13 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => ResetPasswordView(userEmail: email),
         );
-      case RouteNames.dashboard:
-        return MaterialPageRoute(builder: (_) => const DashboardScreen());
+      case RouteNames.homeBottomNavigation:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<HomeBottomNavigationCubit>(
+            create: (context) => HomeBottomNavigationCubit(),
+            child: const HomeBottomNavigationView(),
+          ),
+        );
       case RouteNames.editProfile:
         final ProfileCubit profileController =
             settings.arguments as ProfileCubit;

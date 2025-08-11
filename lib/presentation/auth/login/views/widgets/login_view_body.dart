@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam_app/core/router/route_names.dart';
 import 'package:exam_app/presentation/auth/login/views/widgets/don_not_have_acc.dart';
 import 'package:exam_app/presentation/auth/login/views/widgets/login_button.dart';
@@ -9,6 +6,9 @@ import 'package:exam_app/presentation/auth/login/views/widgets/remember_me_and_f
 import 'package:exam_app/presentation/auth/login/views_model/login_cubit.dart';
 import 'package:exam_app/presentation/auth/login/views_model/login_state.dart';
 import 'package:exam_app/utils/loaders/loaders.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -23,9 +23,10 @@ class LoginViewBody extends StatelessWidget {
             context: context,
           );
         } else if (state is LoginSuccessState) {
-          Navigator.of(
-            context,
-          ).pushNamedAndRemoveUntil(RouteNames.dashboard, (route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            RouteNames.homeBottomNavigation,
+            (route) => false,
+          );
         }
       },
       child: SingleChildScrollView(

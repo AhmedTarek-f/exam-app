@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIconConstraints,
     required this.label,
     this.labelStyle,
+    this.borderRadius = 4,
   });
   final String? hintText;
   final String label;
@@ -49,6 +50,7 @@ class CustomTextFormField extends StatelessWidget {
   final BoxConstraints? suffixIconConstraints;
   final BoxConstraints? prefixIconConstraints;
   final int? maxLength;
+  final double borderRadius;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -79,18 +81,23 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         focusedBorder: buildOutlinedBorder(
           borderColor: Theme.of(context).colorScheme.primary,
+          borderRadius: borderRadius,
         ),
         enabledBorder: buildOutlinedBorder(
           borderColor: Theme.of(context).colorScheme.shadow,
+          borderRadius: borderRadius,
         ),
         focusedErrorBorder: buildOutlinedBorder(
           borderColor: Theme.of(context).colorScheme.primary,
+          borderRadius: borderRadius,
         ),
         errorBorder: buildOutlinedBorder(
           borderColor: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: borderRadius,
         ),
         disabledBorder: buildOutlinedBorder(
           borderColor: Theme.of(context).colorScheme.onSecondary,
+          borderRadius: borderRadius,
         ),
         prefixIcon: prefixIcon,
         prefixIconConstraints:
@@ -112,9 +119,12 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder buildOutlinedBorder({required Color borderColor}) {
+  OutlineInputBorder buildOutlinedBorder({
+    required Color borderColor,
+    required double borderRadius,
+  }) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4.r),
+      borderRadius: BorderRadius.circular(borderRadius.r),
       borderSide: BorderSide(color: borderColor),
     );
   }

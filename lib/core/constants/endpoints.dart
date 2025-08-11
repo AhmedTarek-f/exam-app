@@ -9,4 +9,5 @@ abstract class Endpoints {
   static const String logout = '/api/v1/auth/logout';
   static const String editProfile = '/api/v1/auth/editProfile';
   static const String changePassword = '/api/v1/auth/changePassword';
+  static const String getAllSubjects = '/api/v1/subjects';
 }
