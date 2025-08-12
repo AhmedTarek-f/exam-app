@@ -6,4 +6,5 @@ abstract final class AppImages {
   static const String math = "assets/images/math.png";
   static const String science = "assets/images/science.png";
   static const String appImage = "assets/images/app_image.png";
+  static const String defaultExam = "assets/images/default_exam.png";
 }

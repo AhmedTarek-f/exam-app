@@ -8,4 +8,5 @@ abstract class RouteNames {
   static const String homeBottomNavigation = '/homeBottomNavigationView';
   static const String editProfile = '/editProfileView';
   static const String changePassword = '/changePasswordView';
+  static const String subjectExams = '/subjectExamsView';
 }

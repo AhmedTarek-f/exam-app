@@ -35,6 +35,8 @@ import '../../api/data_source/signup/remote_data_source/signup_remote_data_sourc
     as _i354;
 import '../../api/data_source/splash/remote_data_source/splash_remote_data_source_impl.dart'
     as _i1009;
+import '../../api/data_source/subject_exams/remote_data_source/subject_exams_remote_data_source_impl.dart'
+    as _i380;
 import '../../data/data_source/change_password/remote_data_source/change_password_remote_data_source.dart'
     as _i56;
 import '../../data/data_source/edit_profile/remote_data_source/edit_profile_remote_data_source.dart'
@@ -55,6 +57,8 @@ import '../../data/data_source/signup/remote_data_source/signup_remote_data_sour
     as _i879;
 import '../../data/data_source/splash/remote_data_source/splash_remote_data_source.dart'
     as _i592;
+import '../../data/data_source/subject_exams/remote_data_source/subject_exams_remote_data_source.dart'
+    as _i305;
 import '../../data/repositories/change_password/change_password_repository_impl.dart'
     as _i1063;
 import '../../data/repositories/edit_profile/edit_profile_repository_impl.dart'
@@ -70,6 +74,8 @@ import '../../data/repositories/login/login_repository_impl.dart' as _i722;
 import '../../data/repositories/profile/profile_repository_impl.dart' as _i770;
 import '../../data/repositories/signup/signup_repository_impl.dart' as _i881;
 import '../../data/repositories/splash/splash_repository_impl.dart' as _i928;
+import '../../data/repositories/subject_exams/subject_exams_repository_impl.dart'
+    as _i510;
 import '../../domain/repositories/change_password/change_password_repository.dart'
     as _i556;
 import '../../domain/repositories/edit_profile/edit_profile_repository.dart'
@@ -85,6 +91,8 @@ import '../../domain/repositories/login/login_repository.dart' as _i300;
 import '../../domain/repositories/profile/profile_repository.dart' as _i445;
 import '../../domain/repositories/signup/signup_repository.dart' as _i415;
 import '../../domain/repositories/splash/splash_repository.dart' as _i967;
+import '../../domain/repositories/subject_exams/subject_exams_repository.dart'
+    as _i18;
 import '../../domain/use_cases/change_password/change_password_use_case.dart'
     as _i624;
 import '../../domain/use_cases/edit_profile/edit_profile_use_case.dart' as _i89;
@@ -100,6 +108,8 @@ import '../../domain/use_cases/login/login_with_email_and_password_use_case.dart
 import '../../domain/use_cases/profile/logout_use_case.dart' as _i217;
 import '../../domain/use_cases/signup/signup_use_case.dart' as _i139;
 import '../../domain/use_cases/splash/get_user_use_case.dart' as _i391;
+import '../../domain/use_cases/subject_exams/get_subject_exams_use_case.dart'
+    as _i47;
 import '../../presentation/auth/forget_password/email_verification/views_model/email_verification_cubit.dart'
     as _i533;
 import '../../presentation/auth/forget_password/forget_password_email/views_model/forget_password_email_cubit.dart'
@@ -112,11 +122,11 @@ import '../../presentation/change_password/views_model/change_password_cubit.dar
     as _i276;
 import '../../presentation/edit_profile/views_model/edit_profile_cubit.dart'
     as _i556;
-import '../../presentation/home/presentation/views_model/home_cubit.dart'
-    as _i839;
+import '../../presentation/home/views_model/home_cubit.dart' as _i248;
 import '../../presentation/profile/views_model/profile_cubit.dart' as _i1028;
-import '../../presentation/splash/presentation/views_model/splash_cubit.dart'
-    as _i481;
+import '../../presentation/splash/views_model/splash_cubit.dart' as _i684;
+import '../../presentation/subject_exams/views_model/subject_exams_cubit.dart'
+    as _i923;
 import '../../utils/secure_storage/secure_storage.dart' as _i886;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -142,6 +152,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i787.ResetPasswordRemoteDataSource>(
       () => _i442.ResetPasswordRemoteDataSourceImpl(gh<_i508.ApiClient>()),
     );
+    gh.factory<_i305.SubjectExamsRemoteDataSource>(
+      () => _i380.SubjectExamsRemoteDataSourceImpl(gh<_i508.ApiClient>()),
+    );
     gh.factory<_i592.SplashRemoteDataSource>(
       () => _i1009.SplashRemoteDataSourceImpl(apiClient: gh<_i508.ApiClient>()),
     );
@@ -157,6 +170,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i157.EditProfileRepository>(
       () => _i216.EditProfileRepositoryImpl(
         editProfileRemoteDataSource: gh<_i500.EditProfileRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i18.SubjectExamsRepository>(
+      () => _i510.SubjectExamsRepositoryImpl(
+        gh<_i305.SubjectExamsRemoteDataSource>(),
       ),
     );
     gh.factory<_i879.SignupRemoteDataSource>(
@@ -199,6 +217,9 @@ extension GetItInjectableX on _i174.GetIt {
         splashRemoteDataSource: gh<_i592.SplashRemoteDataSource>(),
       ),
     );
+    gh.factory<_i47.GetSubjectExamsUseCase>(
+      () => _i47.GetSubjectExamsUseCase(gh<_i18.SubjectExamsRepository>()),
+    );
     gh.factory<_i167.EmailVerificationRepository>(
       () => _i155.EmailVerificationRepositoryImpl(
         emailVerificationRemoteDataSource:
@@ -239,8 +260,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i217.LogoutUseCase>(
       () => _i217.LogoutUseCase(gh<_i445.ProfileRepository>()),
     );
-    gh.factory<_i481.SplashCubit>(
-      () => _i481.SplashCubit(
+    gh.factory<_i684.SplashCubit>(
+      () => _i684.SplashCubit(
         gh<_i391.GetUserUseCase>(),
         gh<_i886.SecureStorage>(),
       ),
@@ -261,6 +282,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i624.ChangePasswordUseCase>(
       () => _i624.ChangePasswordUseCase(gh<_i556.ChangePasswordRepository>()),
+    );
+    gh.factory<_i923.SubjectExamsCubit>(
+      () => _i923.SubjectExamsCubit(gh<_i47.GetSubjectExamsUseCase>()),
     );
     gh.factory<_i808.SendEmailVerificationUseCase>(
       () => _i808.SendEmailVerificationUseCase(
@@ -296,8 +320,8 @@ extension GetItInjectableX on _i174.GetIt {
         verifyEmailUseCase: gh<_i513.VerifyEmailUseCase>(),
       ),
     );
-    gh.factory<_i839.HomeCubit>(
-      () => _i839.HomeCubit(gh<_i177.GetAllSubjectsUseCase>()),
+    gh.factory<_i248.HomeCubit>(
+      () => _i248.HomeCubit(gh<_i177.GetAllSubjectsUseCase>()),
     );
     return this;
   }
