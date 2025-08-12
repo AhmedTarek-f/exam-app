@@ -1,6 +1,7 @@
 import 'package:exam_app/core/constants/app_text.dart';
+import 'package:exam_app/core/router/route_names.dart';
 import 'package:exam_app/presentation/home/views/widgets/home_search_field.dart';
-import 'package:exam_app/presentation/home/views/widgets/subjects_section.dart';
+import 'package:exam_app/presentation/home/views/widgets/subjects_list.dart';
 import 'package:exam_app/presentation/home/views_model/home_cubit.dart';
 import 'package:exam_app/presentation/home/views_model/home_state.dart';
 import 'package:exam_app/utils/loaders/loaders.dart';
@@ -15,35 +16,50 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BlocListener<HomeCubit, HomeState>(
-      listenWhen: (previous, current) => current is FetchSubjectsFailureState,
+      listenWhen: (previous, current) =>
+          current is FetchSubjectsFailureState ||
+          current is NavigateToSubjectExamsState,
       listener: (context, state) {
         if (state is FetchSubjectsFailureState) {
           Loaders.showErrorMessage(
             message: state.errorData.message,
             context: context,
           );
+        } else if (state is NavigateToSubjectExamsState) {
+          Navigator.of(
+            context,
+          ).pushNamed(RouteNames.subjectExams, arguments: state.subjectData);
         }
       },
-      child: SingleChildScrollView(
-        child: RPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppText.survey,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.primary,
-                  letterSpacing: 0.05.sp,
-                ),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: RPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppText.survey,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: theme.colorScheme.primary,
+                      letterSpacing: 0.05.sp,
+                    ),
+                  ),
+                  const RSizedBox(height: 16),
+                  const HomeSearchField(),
+                  const RSizedBox(height: 40),
+                  Text(
+                    AppText.browseBySubject,
+                    style: theme.textTheme.labelMedium,
+                  ),
+                  const RSizedBox(height: 24),
+                ],
               ),
-              const RSizedBox(height: 16),
-              const HomeSearchField(),
-              const RSizedBox(height: 40),
-              const SubjectsSection(),
-            ],
+            ),
           ),
-        ),
+          const SubjectsList(),
+        ],
       ),
     );
   }

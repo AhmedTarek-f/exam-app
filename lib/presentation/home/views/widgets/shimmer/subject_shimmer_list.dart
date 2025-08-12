@@ -7,10 +7,9 @@ class SubjectShimmerList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RSizedBox(
-      height: 480,
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
+    return SliverPadding(
+      padding: REdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverList.separated(
         itemBuilder: (context, index) => const SubjectShimmerItem(),
         separatorBuilder: (context, index) => const RSizedBox(height: 16),
         itemCount: 20,

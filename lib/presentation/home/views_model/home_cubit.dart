@@ -17,6 +17,9 @@ class HomeCubit extends Cubit<HomeState> {
       case GetAllSubjectsIntent():
         _fetchSubjects();
         break;
+      case NavigateToSubjectExamsIntent():
+        _navigateToSubjectExams(subjectData: intent.subjectData);
+        break;
     }
   }
 
@@ -41,5 +44,9 @@ class HomeCubit extends Cubit<HomeState> {
           break;
         }
     }
+  }
+
+  void _navigateToSubjectExams({required SubjectEntity subjectData}) {
+    emit(NavigateToSubjectExamsState(subjectData: subjectData));
   }
 }
