@@ -34,6 +34,8 @@ abstract final class AppText {
   static const String explore = "Explore";
   static const String result = "Result";
   static const String profile = "Profile";
+  static const String emptySubjectsMessage =
+      "There is no available subjects yet!";
 
   //Splash
   static const tryAgain = "Try again";
@@ -76,6 +78,13 @@ abstract final class AppText {
 
   // Reset Password
   static const String currentPassword = "Current password";
+
+  // Subject Exams
+  static const String exams = "Exams";
+  static const String question = "Question";
+  static const String minutes = "Minutes";
+  static const String emptyExamsMessage =
+      "There is no available exams for this subject yet!";
 
   //Dialogs
   static const String startQuizMessage =

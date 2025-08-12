@@ -1,4 +1,5 @@
 import 'package:exam_app/core/router/route_names.dart';
+import 'package:exam_app/domain/entities/home/subject_entity.dart';
 import 'package:exam_app/presentation/auth/forget_password/email_verification/views/email_verification_view.dart';
 import 'package:exam_app/presentation/auth/forget_password/forget_password_email/views/forget_password_email_view.dart';
 import 'package:exam_app/presentation/auth/forget_password/reset_password/views/reset_password_view.dart';
@@ -10,6 +11,7 @@ import 'package:exam_app/presentation/home_bottom_navigation/views/home_bottom_n
 import 'package:exam_app/presentation/home_bottom_navigation/views_model/home_bottom_navigation_cubit.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
 import 'package:exam_app/presentation/splash/views/splash_screen.dart';
+import 'package:exam_app/presentation/subject_exams/views/subject_exams_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,6 +53,11 @@ abstract class AppRouter {
         );
       case RouteNames.changePassword:
         return MaterialPageRoute(builder: (_) => const ChangePasswordView());
+      case RouteNames.subjectExams:
+        final SubjectEntity subjectData = settings.arguments as SubjectEntity;
+        return MaterialPageRoute(
+          builder: (_) => SubjectExamsView(subjectData: subjectData),
+        );
       default:
         return null;
     }
