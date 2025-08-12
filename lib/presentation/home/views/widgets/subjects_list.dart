@@ -1,7 +1,7 @@
-import 'package:exam_app/presentation/home/presentation/views/widgets/shimmer/subject_shimmer_list.dart';
-import 'package:exam_app/presentation/home/presentation/views/widgets/subject_item.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_cubit.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_state.dart';
+import 'package:exam_app/presentation/home/views/widgets/shimmer/subject_shimmer_list.dart';
+import 'package:exam_app/presentation/home/views/widgets/subject_item.dart';
+import 'package:exam_app/presentation/home/views_model/home_cubit.dart';
+import 'package:exam_app/presentation/home/views_model/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

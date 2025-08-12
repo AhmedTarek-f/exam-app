@@ -1,9 +1,9 @@
 import 'package:exam_app/core/constants/app_colors.dart';
 import 'package:exam_app/core/constants/app_icons.dart';
 import 'package:exam_app/core/constants/app_text.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views/widgets/build_nav_item.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views_model/home_bottom_navigation_cubit.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views_model/home_bottom_navigation_state.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views/widgets/build_nav_item.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views_model/home_bottom_navigation_cubit.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views_model/home_bottom_navigation_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

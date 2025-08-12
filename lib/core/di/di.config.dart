@@ -112,11 +112,9 @@ import '../../presentation/change_password/views_model/change_password_cubit.dar
     as _i276;
 import '../../presentation/edit_profile/views_model/edit_profile_cubit.dart'
     as _i556;
-import '../../presentation/home/presentation/views_model/home_cubit.dart'
-    as _i839;
+import '../../presentation/home/views_model/home_cubit.dart' as _i248;
 import '../../presentation/profile/views_model/profile_cubit.dart' as _i1028;
-import '../../presentation/splash/presentation/views_model/splash_cubit.dart'
-    as _i481;
+import '../../presentation/splash/views_model/splash_cubit.dart' as _i684;
 import '../../utils/secure_storage/secure_storage.dart' as _i886;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -239,8 +237,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i217.LogoutUseCase>(
       () => _i217.LogoutUseCase(gh<_i445.ProfileRepository>()),
     );
-    gh.factory<_i481.SplashCubit>(
-      () => _i481.SplashCubit(
+    gh.factory<_i684.SplashCubit>(
+      () => _i684.SplashCubit(
         gh<_i391.GetUserUseCase>(),
         gh<_i886.SecureStorage>(),
       ),
@@ -296,8 +294,8 @@ extension GetItInjectableX on _i174.GetIt {
         verifyEmailUseCase: gh<_i513.VerifyEmailUseCase>(),
       ),
     );
-    gh.factory<_i839.HomeCubit>(
-      () => _i839.HomeCubit(gh<_i177.GetAllSubjectsUseCase>()),
+    gh.factory<_i248.HomeCubit>(
+      () => _i248.HomeCubit(gh<_i177.GetAllSubjectsUseCase>()),
     );
     return this;
   }

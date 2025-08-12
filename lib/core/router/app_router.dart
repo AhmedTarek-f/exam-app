@@ -6,10 +6,10 @@ import 'package:exam_app/presentation/auth/login/views/login_view.dart';
 import 'package:exam_app/presentation/auth/signup/views/sign_up_screen.dart';
 import 'package:exam_app/presentation/change_password/views/change_password_view.dart';
 import 'package:exam_app/presentation/edit_profile/views/edit_profile_view.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views/home_bottom_navigation_view.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views_model/home_bottom_navigation_cubit.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views/home_bottom_navigation_view.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views_model/home_bottom_navigation_cubit.dart';
 import 'package:exam_app/presentation/profile/views_model/profile_cubit.dart';
-import 'package:exam_app/presentation/splash/presentation/views/splash_screen.dart';
+import 'package:exam_app/presentation/splash/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

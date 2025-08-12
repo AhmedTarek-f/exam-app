@@ -1,8 +1,8 @@
 import 'package:exam_app/core/constants/app_text.dart';
-import 'package:exam_app/presentation/home/presentation/views/widgets/home_search_field.dart';
-import 'package:exam_app/presentation/home/presentation/views/widgets/subjects_section.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_cubit.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_state.dart';
+import 'package:exam_app/presentation/home/views/widgets/home_search_field.dart';
+import 'package:exam_app/presentation/home/views/widgets/subjects_section.dart';
+import 'package:exam_app/presentation/home/views_model/home_cubit.dart';
+import 'package:exam_app/presentation/home/views_model/home_state.dart';
 import 'package:exam_app/utils/loaders/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

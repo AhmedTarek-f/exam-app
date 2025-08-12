@@ -1,5 +1,5 @@
-import 'package:exam_app/presentation/home/presentation/views/home_view.dart';
-import 'package:exam_app/presentation/home_bottom_navigation/presentation/views_model/home_bottom_navigation_state.dart';
+import 'package:exam_app/presentation/home/views/home_view.dart';
+import 'package:exam_app/presentation/home_bottom_navigation/views_model/home_bottom_navigation_state.dart';
 import 'package:exam_app/presentation/profile/views/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

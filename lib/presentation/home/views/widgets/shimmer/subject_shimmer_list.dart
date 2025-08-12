@@ -1,4 +1,4 @@
-import 'package:exam_app/presentation/home/presentation/views/widgets/shimmer/subject_shimmer_item.dart';
+import 'package:exam_app/presentation/home/views/widgets/shimmer/subject_shimmer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

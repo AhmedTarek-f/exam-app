@@ -1,8 +1,8 @@
 import 'package:exam_app/api/client/api_result.dart';
 import 'package:exam_app/domain/entities/home/subject_entity.dart';
 import 'package:exam_app/domain/use_cases/home/get_all_subjects_use_case.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_intent.dart';
-import 'package:exam_app/presentation/home/presentation/views_model/home_state.dart';
+import 'package:exam_app/presentation/home/views_model/home_intent.dart';
+import 'package:exam_app/presentation/home/views_model/home_state.dart';
 import 'package:exam_app/utils/exceptions/response_exception.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
